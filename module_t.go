@@ -9,8 +9,8 @@ import (
 
 const (
 	theMainModuleName     = "github.com/starter-go/browsers"
-	theMainModuleVersion  = "v0.0.0"
-	theMainModuleRevision = 0
+	theMainModuleVersion  = "v0.0.1"
+	theMainModuleRevision = 1
 	theMainModuleResPath  = "src/main/resources"
 )
 
