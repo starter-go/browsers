@@ -1,12 +1,17 @@
 package lib
 
-import "github.com/starter-go/browsers"
+import (
+	"github.com/starter-go/afs"
+	"github.com/starter-go/browsers"
+)
 
 // MSEdge ...
 type MSEdge struct {
 
 	//starter:component
 	_as func(browsers.Registry) //starter:as(".")
+
+	FS afs.FS //starter:inject("#")
 
 	ExePath  string //starter:inject("${browser.msedge.executable}")
 	Enabled  bool   //starter:inject("${browser.msedge.enabled}")
@@ -26,16 +31,21 @@ func (inst *MSEdge) Registration() *browsers.Registration {
 	}
 }
 
+func (inst *MSEdge) getPath() afs.Path {
+	exe := inst.FS.NewPath(inst.ExePath)
+	return locateExecutable(exe, "msedge")
+}
+
 // Accept ...
 func (inst *MSEdge) Accept(i *browsers.Intent) bool {
-	exe := getPath(inst.ExePath)
+	exe := inst.getPath()
 	return exe.IsFile()
 }
 
 // Open ...
 func (inst *MSEdge) Open(i *browsers.Intent) (browsers.Task, error) {
 	url := i.URL
-	exe := getPath(inst.ExePath)
+	exe := inst.getPath()
 	args := []string{url}
 	t := &task{
 		Context:    i.Context,

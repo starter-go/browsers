@@ -1,5 +1,6 @@
 package main4browsers
 import (
+    p0d2a11d16 "github.com/starter-go/afs"
     pa1bfd2596 "github.com/starter-go/browsers"
     peec03e62f "github.com/starter-go/browsers/src/main/golang/lib"
      "github.com/starter-go/application"
@@ -36,12 +37,18 @@ func (inst* peec03e62f2_lib_Chrome) inject(injext application.InjectionExt, inst
 	nop(ie, com)
 
 	
+    com.FS = inst.getFS(ie)
     com.ExePath = inst.getExePath(ie)
     com.Enabled = inst.getEnabled(ie)
     com.Priority = inst.getPriority(ie)
 
 
     return nil
+}
+
+
+func (inst*peec03e62f2_lib_Chrome) getFS(ie application.InjectionExt)p0d2a11d16.FS{
+    return ie.GetComponent("#alias-0d2a11d163e349503a64168a1cdf48a2-FS").(p0d2a11d16.FS)
 }
 
 
@@ -92,12 +99,18 @@ func (inst* peec03e62f2_lib_Firefox) inject(injext application.InjectionExt, ins
 	nop(ie, com)
 
 	
+    com.FS = inst.getFS(ie)
     com.ExePath = inst.getExePath(ie)
     com.Enabled = inst.getEnabled(ie)
     com.Priority = inst.getPriority(ie)
 
 
     return nil
+}
+
+
+func (inst*peec03e62f2_lib_Firefox) getFS(ie application.InjectionExt)p0d2a11d16.FS{
+    return ie.GetComponent("#alias-0d2a11d163e349503a64168a1cdf48a2-FS").(p0d2a11d16.FS)
 }
 
 
@@ -148,12 +161,18 @@ func (inst* peec03e62f2_lib_MSEdge) inject(injext application.InjectionExt, inst
 	nop(ie, com)
 
 	
+    com.FS = inst.getFS(ie)
     com.ExePath = inst.getExePath(ie)
     com.Enabled = inst.getEnabled(ie)
     com.Priority = inst.getPriority(ie)
 
 
     return nil
+}
+
+
+func (inst*peec03e62f2_lib_MSEdge) getFS(ie application.InjectionExt)p0d2a11d16.FS{
+    return ie.GetComponent("#alias-0d2a11d163e349503a64168a1cdf48a2-FS").(p0d2a11d16.FS)
 }
 
 

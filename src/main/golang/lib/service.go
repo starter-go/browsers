@@ -4,9 +4,9 @@ import (
 	"fmt"
 
 	"github.com/starter-go/afs"
-	"github.com/starter-go/afs/files"
 	"github.com/starter-go/base/util"
 	"github.com/starter-go/browsers"
+	"github.com/starter-go/vlog"
 )
 
 // BrowserServiceImpl ...
@@ -85,6 +85,21 @@ func (inst *BrowserServiceImpl) Open(intent *browsers.Intent) (browsers.Task, er
 	return nil, fmt.Errorf("no browser can handle the intent")
 }
 
-func getPath(path string) afs.Path {
-	return files.FS().NewPath(path)
+func locateExecutable(exe afs.Path, browser string) afs.Path {
+
+	if exe != nil {
+		if exe.IsFile() {
+			return exe
+		}
+	}
+
+	// load from default config file
+	locator := new(defaultBrowserLocator)
+	path, err := locator.locate(browser)
+	if err != nil {
+		vlog.Warn(err.Error())
+		return exe
+	}
+
+	return path
 }
